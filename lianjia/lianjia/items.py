@@ -5,10 +5,17 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy import Item,Field
 
 
-class LianjiaItem(scrapy.Item):
+class LianjiaItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    
+    house_title = Field()
+    house_community = Field()
+    house_room = Field()
+    house_area = Field()
+    house_location = Field()
+    house_price = Field()
+    price_setp = Field()

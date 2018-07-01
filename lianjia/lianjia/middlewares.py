@@ -102,7 +102,7 @@ class LianjiaDownloaderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
-# 随机请求头 载中间件
+# ????? ????
 
 from faker import Faker
 class lianjiaDownloadmiddlewareRandomUseragent(object):
@@ -112,3 +112,29 @@ class lianjiaDownloadmiddlewareRandomUseragent(object):
     def process_request(self,request,spider):
         # print(self.fake.user_agent())
         request.headers.setdefault('User-Agent',self.fake.user_agent())
+'''
+# ????IP???? ?????
+
+import sys
+import time
+import hashlib
+
+class pythonjobDownloadmiddlewareRandomProxyIP(object):
+    def __init__(self):
+        orderno = "ZF2018476659Bxv7sN"     # ??????
+        secret = "784689dd77d640e59a1890755c15113f"   # ?????
+        ip_port = "forward.xdaili.cn:80"
+        timestamp = str(int(time.time()))  # ?????
+        string = "orderno=" + orderno + "," + "secret=" + secret + "," + "timestamp=" + timestamp
+        string = string.encode()
+        md5_string = hashlib.md5(string).hexdigest()  # ??sign
+        sign = md5_string.upper()  # ?????
+        self.proxy = "http://" + ip_port
+        self.auth = "sign=" + sign + "&" + "orderno=" + orderno + "&" + "timestamp=" + timestamp
+
+    def process_request(self,request,spider):
+        # print(self.fake.user_agent())
+        request.meta['proxy'] = self.proxy
+        request.headers.setdefault('Proxy-Authorization',self.auth)
+
+'''
